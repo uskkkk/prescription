@@ -4,7 +4,7 @@
 
 ````
 - IDE: IntelliJ
-- Framework: Spring Boot 3.0.6, JPA
+- Framework: Spring Boot 2.7.11, JPA
 - Language: Java 17
 - Database: MariaDB
 - Build: Gradle (Groovy)
