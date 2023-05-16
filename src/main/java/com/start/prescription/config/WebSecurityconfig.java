@@ -1,5 +1,6 @@
 package com.start.prescription.config;
 
+import com.start.prescription.common.handler.CustomAuthenticationFailureHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +13,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityconfig {
+
+    private final CustomAuthenticationFailureHandler failureHandler;
+
+    public WebSecurityconfig(CustomAuthenticationFailureHandler failureHandler) {
+        this.failureHandler = failureHandler;
+    }
 
     // 변경된 AuthenticationManager 빈 생성시 UserDetail, PasswordEncoder 자동 설정되어 불필요 함.
     /*@Bean
