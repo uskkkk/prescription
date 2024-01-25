@@ -25,7 +25,7 @@ public class SwaggerController {
     @Operation(summary = "prescription swagger 테스트" , description = "swagger 테스트입니다.")
     @GetMapping("home/{id}")
     public ResponseEntity<String> swaggerTest(@Parameter(description = "ID" ,required = true, example = "hello") @PathVariable("id") String id) {
-        return new ResponseEntity("hello" + id, HttpStatus.OK);
+        return new ResponseEntity("hello " + id, HttpStatus.OK);
     }
 
     @GetMapping("crawling")

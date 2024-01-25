@@ -19,7 +19,6 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         String message;
-
         if(exception instanceof BadCredentialsException) {
             message = "아아디 또는 비밀번호가 맞지 않습니다.";
         } else if(exception instanceof InternalAuthenticationServiceException) {

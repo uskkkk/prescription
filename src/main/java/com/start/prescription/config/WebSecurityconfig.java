@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.filter.ForwardedHeaderFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -28,7 +29,13 @@ public class WebSecurityconfig {
     // 정적 리소스 security 설정 무시
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/css/**", "/js/**");
+        return (web) -> web.ignoring()
+                .antMatchers("/css/**", "/js/**","/swagger-ui/**","/v1/api/**","/api-docs/**");
+    }
+
+    @Bean
+    ForwardedHeaderFilter forwardedHeaderFilter() {
+        return new ForwardedHeaderFilter();
     }
 
     // 인증 (PasswordEncoder, UserDetail 생략 가능)
@@ -55,6 +62,10 @@ public class WebSecurityconfig {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/home").permitAll()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/home/**").permitAll()
+                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/v1/api/**").permitAll()
+                .antMatchers("/api-docs/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                     .formLogin()
